@@ -1,0 +1,72 @@
+--- flac-1.4.3/src/libFLAC/stream_decoder.c
++++ thirdparty/libflac-src/src/libFLAC/stream_decoder.c
+@@ -53,6 +53,9 @@
+ #include "private/md5.h"
+ #include "private/memory.h"
+ #include "private/macros.h"
++#ifdef XDJ700_FLAC_BLOCKSIZE_GUARD
++#include "flac_mod.h"
++#endif
+ 
+ 
+ /* technically this should be in an "export.c" but this is convenient enough */
+@@ -2008,8 +2011,16 @@
+ 		}
+ 		if(x == 0xff) { /* MAGIC NUMBER for the first 8 frame sync bits */
+ 			decoder->private_->header_warmup[0] = (FLAC__byte)x;
+-			if(!FLAC__bitreader_read_raw_uint32(decoder->private_->input, &x, 8))
++			if(!FLAC__bitreader_read_raw_uint32(decoder->private_->input, &x, 8)) {
++#ifdef XDJ700_FLAC_BLOCKSIZE_GUARD
++				/* EOF after only the first sync byte is an incomplete frame.
++				 * Report it where the bitreader still knows whether that byte
++				 * belongs to the sync search, rather than guessing from the
++				 * final input byte (which may be a valid frame CRC). */
++				send_error_to_client_(decoder, FLAC__STREAM_DECODER_ERROR_STATUS_LOST_SYNC);
++#endif
+ 				return false; /* read_callback_ sets the state for us */
++			}
+ 
+ 			/* we have to check if we just read two 0xff's in a row; the second may actually be the beginning of the sync code */
+ 			/* else we have to check if the second byte is the end of a sync code */
+@@ -2058,6 +2069,15 @@
+ 		return false;
+ 	if(decoder->protected_->state == FLAC__STREAM_DECODER_SEARCH_FOR_FRAME_SYNC) /* means we didn't sync on a valid header */
+ 		return true;
++#ifdef XDJ700_FLAC_BLOCKSIZE_GUARD
++	/* The target adapter uses a bounded bump arena.  Reject an otherwise
++	 * syntactically valid large frame before allocate_output_() can size its
++	 * per-channel arrays from the untrusted frame header. */
++	if(decoder->private_->frame.header.blocksize > FLAC_MOD_MAX_BLOCKSIZE) {
++		decoder->protected_->state = FLAC__STREAM_DECODER_ABORTED;
++		return false;
++	}
++#endif
+ 	if(!allocate_output_(decoder, decoder->private_->frame.header.blocksize, decoder->private_->frame.header.channels, decoder->private_->frame.header.bits_per_sample))
+ 		return false;
+ 	for(channel = 0; channel < decoder->private_->frame.header.channels; channel++) {
+@@ -2151,6 +2171,17 @@
+ 		FLAC__ASSERT(decoder->private_->frame.header.number_type == FLAC__FRAME_NUMBER_TYPE_SAMPLE_NUMBER);
+ 		FLAC__ASSERT(decoder->private_->last_frame.header.number_type == FLAC__FRAME_NUMBER_TYPE_SAMPLE_NUMBER);
+ 		if(decoder->private_->last_frame.header.number.sample_number + decoder->private_->last_frame.header.blocksize < decoder->private_->frame.header.number.sample_number) {
++#ifdef XDJ700_FLAC_BLOCKSIZE_GUARD
++			/* Target policy: reject discontinuous input rather than synthesize
++			 * silence. The bounded, incremental adapter rejects damaged streams
++			 * and permits only one PCM callback per step. Upstream gap repair
++			 * also puts a full FLAC__Frame on the stack (3584 bytes including
++			 * locals/saves on SH-4), exceeding the native 3072-byte task stack
++			 * even when this branch is not taken. Compile the repair out of the
++			 * target build; leave ordinary upstream builds unchanged. */
++			decoder->protected_->state = FLAC__STREAM_DECODER_ABORTED;
++			return false;
++#else
+ 			uint32_t padding_samples_needed = decoder->private_->frame.header.number.sample_number - (decoder->private_->last_frame.header.number.sample_number + decoder->private_->last_frame.header.blocksize);
+ 
+ 			/* Do some extra validation to assure last frame an current frame
+@@ -2211,6 +2242,7 @@
+ 						free(empty_buffer[i]);
+ 
+ 			}
++#endif
+ 		}
+ 	}
+ 

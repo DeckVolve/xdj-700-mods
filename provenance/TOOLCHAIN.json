@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "version": "sh-sh4--uclibc--stable-2025.08-1",
+  "host": "x86_64 Linux",
+  "target": "SH-4 little-endian",
+  "archive_url": "https://toolchains.bootlin.com/downloads/releases/toolchains/sh-sh4/tarballs/sh-sh4--uclibc--stable-2025.08-1.tar.xz",
+  "checksum_url": "https://toolchains.bootlin.com/downloads/releases/toolchains/sh-sh4/tarballs/sh-sh4--uclibc--stable-2025.08-1.sha256",
+  "archive_sha256": "e8c2065017a3cd2355dcbb12773edfa6b8078e963178f047ccdfa493ccef1f6a",
+  "archive_bytes": 71277816,
+  "archive_verified_against_upstream": true,
+  "gcc_version": "14.3.0",
+  "binutils_version": "2.43.1",
+  "libgcc_member_path": "sh-sh4--uclibc--stable-2025.08-1/lib/gcc/sh4-buildroot-linux-uclibc/14.3.0/libgcc.a",
+  "libgcc_sha256": "b5717d3562f23ad535ee0740b8bfb602c34ab70efdd40eaea0eb956d73f20fad",
+  "toolchain_sources": "https://toolchains.bootlin.com/downloads/releases/sources/",
+  "toolchain_licenses": "https://toolchains.bootlin.com/downloads/releases/licenses/",
+  "toolchain_redistributed": false
+}

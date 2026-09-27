@@ -1,0 +1,391 @@
+{
+  "files": [
+    {
+      "bytes": 18346,
+      "path": "build_flac_alpha1_source.py",
+      "sha256": "d3f163948bf7abc35af265139561b3c9431f9fc3f428e1ee0cd517b95c357174"
+    },
+    {
+      "bytes": 12431,
+      "path": "lzss_pioneer.py",
+      "sha256": "5e50b8b342ad001935c22df6434b57570b1baa300a76c28aa1bf1e412c664e8a"
+    },
+    {
+      "bytes": 10440,
+      "path": "patcher.py",
+      "sha256": "42bc0563028aac47d795bd9ea7168c719b8922ac6db46c5efbaf576afd6622e7"
+    },
+    {
+      "bytes": 2462,
+      "path": "srecord_update.py",
+      "sha256": "d3e1778facb4c6a253b517b40b4f69177d50f07826b89a47f748ae07ab46b4a9"
+    },
+    {
+      "bytes": 8627,
+      "path": "thirdparty/alac_container.h",
+      "sha256": "8e47923cc86fe9156e7b4ff3f9d6f1a3047a84ffa83e6cd3e43272d760f0c2f8"
+    },
+    {
+      "bytes": 4937,
+      "path": "thirdparty/alac_mod.h",
+      "sha256": "6b5adef2ec3ad01a51891444150c9a754bab35abf121c6f5f751707af12a837b"
+    },
+    {
+      "bytes": 7176,
+      "path": "thirdparty/alac_stream.h",
+      "sha256": "2790d8bc317965abac63e233c38619d8a9ed01d2573ccf8414ee994bcc8b84a8"
+    },
+    {
+      "bytes": 19956,
+      "path": "thirdparty/audio_file.c",
+      "sha256": "f8ceada5ca722abf72297bcafc361b5fc6499dc7474899b5630305d814fddcf4"
+    },
+    {
+      "bytes": 5548,
+      "path": "thirdparty/audio_file.h",
+      "sha256": "b233fe8bfe3f669ed6cd83b0335ef016da974f0154b25a46feb993dfdf6d0af6"
+    },
+    {
+      "bytes": 117,
+      "path": "thirdparty/build/dual_format_payload.c",
+      "sha256": "76f9a08bad92a5e693f9ae12c14b600b0e7a5f72b5a56a504cb4eba23966b4bc"
+    },
+    {
+      "bytes": 1007,
+      "path": "thirdparty/build/dual_format_runtime.h",
+      "sha256": "09cffb30caccfeff26759a59fe54060aea1633901de53b2fa07d8e15ab3bf9ca"
+    },
+    {
+      "bytes": 107,
+      "path": "thirdparty/build/flac_glue.c",
+      "sha256": "e41039a96ba362d77ec343f258b69baba247b78f2ac01f361c74224b5fa5bb86"
+    },
+    {
+      "bytes": 106,
+      "path": "thirdparty/build/flac_mod.h",
+      "sha256": "06b0cd8dac61a8343bf7640264df097beceadacde938f89e8b9e5357fc04e4a7"
+    },
+    {
+      "bytes": 3737,
+      "path": "thirdparty/build/stock_lossless_veneer.S",
+      "sha256": "8c08ef9af199411f4d397e15b1c2e2e7e728a9df6d95c8348135247cb98a5268"
+    },
+    {
+      "bytes": 25020,
+      "path": "thirdparty/build/xdj700_lossless_tail_gate.S",
+      "sha256": "b7bf9c99280d0bea1114c8f4fe864170759fdbe6a02e0e88ce30c0f527c3452d"
+    },
+    {
+      "bytes": 2415,
+      "path": "thirdparty/build/xdj700_lossless_tail_gate.ld",
+      "sha256": "33f22c1dec49acd5cca028c1daa0832cc17317a31a412b60b5cad81fce2b4e90"
+    },
+    {
+      "bytes": 23451,
+      "path": "thirdparty/dual_format_payload.c",
+      "sha256": "60900ba5d98d4dca8019f02205e3efd0fa23eed56eec00f7a15119e79cf721e2"
+    },
+    {
+      "bytes": 9691,
+      "path": "thirdparty/dual_format_payload.h",
+      "sha256": "fe43194f89cc0111d7b28082df1007e45aa0cf2e0a1697e4555bc5240a7d28d2"
+    },
+    {
+      "bytes": 57862,
+      "path": "thirdparty/flac_glue.c",
+      "sha256": "ae87e741e896dc03cd94bcd4e92beb6e4f64178d5c05b6e655a6f0b12d763e37"
+    },
+    {
+      "bytes": 5897,
+      "path": "thirdparty/flac_metadata.c",
+      "sha256": "66c23ae100c02809104b86a62725deb5f68ea22bdbaad25f8d567acc54dcdad8"
+    },
+    {
+      "bytes": 1754,
+      "path": "thirdparty/flac_metadata.h",
+      "sha256": "b2f97660ca941208c5e16af8e85c5c501b217eb17b0e93409bc492501fb79f91"
+    },
+    {
+      "bytes": 13848,
+      "path": "thirdparty/flac_mod.h",
+      "sha256": "236b6ae0d1bee9eb0d2d70341fb9e69a4b1861ac165c66b22ac47bff1c2cb4c5"
+    },
+    {
+      "bytes": 1509,
+      "path": "thirdparty/libflac-src/COPYING.Xiph",
+      "sha256": "12600ea1a7affcbf469bd0d8b2cd725e4167114a2ee834b88f5d2857bfd7ddbf"
+    },
+    {
+      "bytes": 2153,
+      "path": "thirdparty/libflac-src/include/FLAC/assert.h",
+      "sha256": "385573c87c67aee2b54785fd65ec50b01af5490ebc4897ae69f7db2a20b529d8"
+    },
+    {
+      "bytes": 7649,
+      "path": "thirdparty/libflac-src/include/FLAC/callback.h",
+      "sha256": "360821904205d0fe88698e5ae98b1c5d9e0d355ce67ab1a1d55a4bf47f9f727f"
+    },
+    {
+      "bytes": 4102,
+      "path": "thirdparty/libflac-src/include/FLAC/export.h",
+      "sha256": "958e42bc159e9eebacf706fa332e92d66e29f84a906224684990bbef9650c7a5"
+    },
+    {
+      "bytes": 41367,
+      "path": "thirdparty/libflac-src/include/FLAC/format.h",
+      "sha256": "c0680f56b1c4a123212d2e0cedafedf0a729fa1ec833bfc12936201938caba3c"
+    },
+    {
+      "bytes": 101800,
+      "path": "thirdparty/libflac-src/include/FLAC/metadata.h",
+      "sha256": "26c7dfca7b9b59745e0611d0ec7bbf9600d4b5be5a4a6f64db4221fa8e3f8835"
+    },
+    {
+      "bytes": 2081,
+      "path": "thirdparty/libflac-src/include/FLAC/ordinals.h",
+      "sha256": "6116952f8888924b1f6b794287682c9427427bb1b79248675773fafa06f084e8"
+    },
+    {
+      "bytes": 71583,
+      "path": "thirdparty/libflac-src/include/FLAC/stream_decoder.h",
+      "sha256": "9de5f4f76f7f0e2b76c2a53b2dd3c2177b30a413655dbc2691465cbf8c60b4f7"
+    },
+    {
+      "bytes": 8269,
+      "path": "thirdparty/libflac-src/include/share/alloc.h",
+      "sha256": "ec48e35b98e812bcd7dbc90efd5ec1fc6c8d3918471974d40371428b4127a0fa"
+    },
+    {
+      "bytes": 7706,
+      "path": "thirdparty/libflac-src/include/share/compat.h",
+      "sha256": "369e660381faaf4133faee865968a57907d9aaea4f232e2c6cab390fbed7379d"
+    },
+    {
+      "bytes": 2942,
+      "path": "thirdparty/libflac-src/include/share/endswap.h",
+      "sha256": "53b6b4ed17014babae049b4103d3210ae5820fb34d49b34eeee88817a900b4d0"
+    },
+    {
+      "bytes": 2055,
+      "path": "thirdparty/libflac-src/include/share/macros.h",
+      "sha256": "3f1d948dbcf89e1c9fed687dacc95f6f78ca37e8a9aa0d34dbbc70415bb98d02"
+    },
+    {
+      "bytes": 2353,
+      "path": "thirdparty/libflac-src/src/libFLAC/bitmath.c",
+      "sha256": "f103a37ac5390a92b9ac65b2682c01be2663c8632e2a046ce2276a567eb16253"
+    },
+    {
+      "bytes": 32146,
+      "path": "thirdparty/libflac-src/src/libFLAC/bitreader.c",
+      "sha256": "c18f2f928b17ca69888fa858dba8197ce5948983ec82aec8b970066f6ca33e0f"
+    },
+    {
+      "bytes": 8756,
+      "path": "thirdparty/libflac-src/src/libFLAC/cpu.c",
+      "sha256": "8330f3f09704be8fd3e2c585be12eb468460986449109afda907459ef68e4532"
+    },
+    {
+      "bytes": 24606,
+      "path": "thirdparty/libflac-src/src/libFLAC/crc.c",
+      "sha256": "1622d0f864015a471f498778c0d6c93d2907cad8c089eb4cd23a320387ea14dd"
+    },
+    {
+      "bytes": 3867,
+      "path": "thirdparty/libflac-src/src/libFLAC/deduplication/bitreader_read_rice_signed_block.c",
+      "sha256": "abaf9793452f60bfa91e6a7e94b2d3f0efbbb81ff683eb76f6649814bf8c8cf8"
+    },
+    {
+      "bytes": 423,
+      "path": "thirdparty/libflac-src/src/libFLAC/deduplication/lpc_compute_autocorrelation_intrin.c",
+      "sha256": "2dfd5b204c82b81f75ca31cda4465d42e4a4299105a6fed5f4cf26d07e1a14ea"
+    },
+    {
+      "bytes": 24755,
+      "path": "thirdparty/libflac-src/src/libFLAC/fixed.c",
+      "sha256": "55e296598fba0f4fa1da01f6c48c43dca8c75f44488a96badbadb367b60a8e1f"
+    },
+    {
+      "bytes": 9168,
+      "path": "thirdparty/libflac-src/src/libFLAC/float.c",
+      "sha256": "5b12e41c25bb0fe9aeec9f16a01ac6e25474781a0ae693f7ecba5c0d1322750c"
+    },
+    {
+      "bytes": 22115,
+      "path": "thirdparty/libflac-src/src/libFLAC/format.c",
+      "sha256": "d6523512ded8917d7c24ada79d4382c88c1e55186eb0ba58c95080b997d54c29"
+    },
+    {
+      "bytes": 6479,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/bitmath.h",
+      "sha256": "5e0ffc003fd4698d7f22aaf92033417ac7fc9f8be7025e6507a3696ffa2a6fb1"
+    },
+    {
+      "bytes": 5155,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/bitreader.h",
+      "sha256": "4ebacb06d75c0ceba8968db765e054e45a7b6bd8792f74882eb3d8bd432021cd"
+    },
+    {
+      "bytes": 4919,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/bitwriter.h",
+      "sha256": "33a0711bf68f5921f66ecff0fd1779ec9c3b36496d85a82a668aba7e471dc5d6"
+    },
+    {
+      "bytes": 5910,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/cpu.h",
+      "sha256": "bf5b5c933c711f209c6cbea51361d0b44aa7cb6c851d8a6c3fb70f54f5bf64c4"
+    },
+    {
+      "bytes": 2599,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/crc.h",
+      "sha256": "abb6e71b05288cc2d27d43777c7749fcb4c898199e61bbdf3bcd888b1154979b"
+    },
+    {
+      "bytes": 6549,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/fixed.h",
+      "sha256": "d7b26189f4eca3c69016cc77a605de1642bf16aad2ed889a56895184c1a69f30"
+    },
+    {
+      "bytes": 3632,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/float.h",
+      "sha256": "62cebe743573e89095e2f2a10639c8a9a3d19b95710164118671b21d580c95c4"
+    },
+    {
+      "bytes": 2551,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/format.h",
+      "sha256": "7ff3cd4b162029e2c50b652282a482faa8be2d8e5499db572edf894a1c747533"
+    },
+    {
+      "bytes": 13596,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/lpc.h",
+      "sha256": "5877ba09076d7b87865ec5e4eb4091728285c2b1d8e846de6fa2905919020b4b"
+    },
+    {
+      "bytes": 2656,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/macros.h",
+      "sha256": "c4be90451ab1448e82f83634e5cc474d6d87a5af7dd679ff7833ec46cf9f047a"
+    },
+    {
+      "bytes": 1642,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/md5.h",
+      "sha256": "12a739cb6b87c4ebcd77b4af2ccd9c9d7297b1d912f88bf968b3bcbaeca60cc0"
+    },
+    {
+      "bytes": 2815,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/memory.h",
+      "sha256": "4df8591b77ca73f5dfd8f7bc514eac0f4aac3769db1713ba7309faf16f8f787a"
+    },
+    {
+      "bytes": 2107,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/metadata.h",
+      "sha256": "9f2126a3c8d7ac43007ce640ed5c46b8f14dd6b53840689810e942f0f14b035c"
+    },
+    {
+      "bytes": 2659,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/stream_encoder_framing.h",
+      "sha256": "399114c920341919edc0b481f07c1ecec219a2f4468bea9564ff608abaa9ecd4"
+    },
+    {
+      "bytes": 3554,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/private/window.h",
+      "sha256": "47373f45641f78dfd78647bc2c7d4445ed9184ce8c33ae5d157211ded3be216f"
+    },
+    {
+      "bytes": 2526,
+      "path": "thirdparty/libflac-src/src/libFLAC/include/protected/stream_decoder.h",
+      "sha256": "e5949c8616c9d375a881998a31964fd5495619150443c768da73b9353de92152"
+    },
+    {
+      "bytes": 61228,
+      "path": "thirdparty/libflac-src/src/libFLAC/lpc.c",
+      "sha256": "5d44630f725a3eacc1aff0211dd1754acb1309ba612cfd6352984861c0b2312a"
+    },
+    {
+      "bytes": 17025,
+      "path": "thirdparty/libflac-src/src/libFLAC/md5.c",
+      "sha256": "7a98576c888b6588cf1e184cc291297f4c5fb9aea6a5d3d8ffe790148cf6682a"
+    },
+    {
+      "bytes": 6603,
+      "path": "thirdparty/libflac-src/src/libFLAC/memory.c",
+      "sha256": "30e1f9dbf8dfa69f1259aa87e85acfab04f11f052390de9442b7aae6a202cd51"
+    },
+    {
+      "bytes": 125469,
+      "path": "thirdparty/libflac-src/src/libFLAC/metadata_iterators.c",
+      "sha256": "797c8b8d7502bec154b8d6dd256cd922bcc33b8fc2b55a5e3215a8fcbd95f2d6"
+    },
+    {
+      "bytes": 68080,
+      "path": "thirdparty/libflac-src/src/libFLAC/metadata_object.c",
+      "sha256": "c5dd6a85a4c064622a0e02d7a7475c9dbe0e19acc90ca22fb1cd33c676b1a7c8"
+    },
+    {
+      "bytes": 149979,
+      "path": "thirdparty/libflac-src/src/libFLAC/stream_decoder.c",
+      "sha256": "7b45b33646035c0915b52e6aa6899247da5964dfd7c49dc544f65387e868917f"
+    },
+    {
+      "bytes": 9472,
+      "path": "thirdparty/libflac-src/src/libFLAC/window.c",
+      "sha256": "75a8d1b7dbb301d68e1bd10f296dc36f6b682c95e6a62e86f1cc301429e8f8eb"
+    },
+    {
+      "bytes": 30460,
+      "path": "thirdparty/lossless_wave_bridge.c",
+      "sha256": "ca3d84eb733936bb9f7e0e611fc6e89b574c67b315e8733ee71cefcd6e401f33"
+    },
+    {
+      "bytes": 8164,
+      "path": "thirdparty/lossless_wave_bridge.h",
+      "sha256": "b42705004408b6faf51448fdc554033cc7add2e8435945b22d6207a096257a6c"
+    },
+    {
+      "bytes": 5276,
+      "path": "thirdparty/retained_format_router.h",
+      "sha256": "bfd0f71a79111837f101527a05efe9b83902a402c1325c6f096c58a058e0c0ab"
+    },
+    {
+      "bytes": 6138,
+      "path": "thirdparty/retained_format_router_flac_only.c",
+      "sha256": "9f7e119b790cae72bf6974a6c9e7235d91a2b3e439e109daa6899e154b4317d3"
+    },
+    {
+      "bytes": 84818,
+      "path": "thirdparty/stock_lossless_adapter.c",
+      "sha256": "44b2ce91fd904d4b780138a4b5fcfeea8037e51da50ceb71f53a7660229849c3"
+    },
+    {
+      "bytes": 2246,
+      "path": "thirdparty/stock_lossless_adapter.h",
+      "sha256": "fcc4d0a168ec58d9e902f6cbdceefba93a1c8ef1e92a500373bb03d805a874e3"
+    },
+    {
+      "bytes": 32846,
+      "path": "thirdparty/stock_lossless_sync.h",
+      "sha256": "979dff9b6047fc6d2bc8e1889785a8a5190fa7272adac5955798a4e472affe7f"
+    },
+    {
+      "bytes": 26278,
+      "path": "thirdparty/xdj700_non_audio_diagnostic.h",
+      "sha256": "2e79fd355e0b078f6294870dd85e5e55d4aa1799340b4f4462020d31cb112d9b"
+    },
+    {
+      "bytes": 53638,
+      "path": "tools/build_dual_format_payload.py",
+      "sha256": "3065134f221a514f549b683c25e81fd8865659a5dc5991f70a965c3c27235793"
+    },
+    {
+      "bytes": 2899,
+      "path": "tools/build_libflac_sh4.sh",
+      "sha256": "827aac82a2f08f105f9dd33b19ddb6c6948382127f1c98f307a4d337192fa5cb"
+    },
+    {
+      "bytes": 5579,
+      "path": "tools/sh4_stack_usage.py",
+      "sha256": "1fb041d60aa1fb30b018b4876a4cddca3fa98f5783327bcdd0115012d07ac890"
+    }
+  ],
+  "schema": 1,
+  "scope": "FLAC alpha.1 complete source build inputs"
+}

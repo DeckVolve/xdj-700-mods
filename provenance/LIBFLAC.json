@@ -1,0 +1,13 @@
+{
+  "component": "libFLAC",
+  "version": "1.4.3",
+  "archive_url": "https://downloads.xiph.org/releases/flac/flac-1.4.3.tar.xz",
+  "archive_sha256": "6c58e69cd22348f441b861092b825e591d0b822e106de6eb0ee4d05d27205b70",
+  "upstream_license": "BSD-3-Clause; md5.c and include/private/md5.h retain their public-domain notices",
+  "local_changes": {
+    "path": "thirdparty/libflac-src/src/libFLAC/stream_decoder.c",
+    "patch": "provenance/stream_decoder.local.patch",
+    "patch_sha256": "b6698028bf56bfcae0d10751c4737aa72c4b1768343cc49c4d0694f16ea4c282",
+    "license": "BSD-3-Clause AND MIT"
+  }
+}
