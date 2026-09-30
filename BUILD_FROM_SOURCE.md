@@ -1,7 +1,7 @@
-# Rebuild the FLAC alpha.1 template from source
+# Rebuild the FLAC alpha.2 template from source
 
 This source build reproduces the exact `flac_alpha1_template.json` shipped with
-the fixed XDJ-700 FLAC alpha.1 patcher. It uses the FLAC-only C sources, libFLAC
+the fixed XDJ-700 FLAC alpha.2 patcher. It uses the FLAC-only C sources, libFLAC
 1.4.3 sources, sanitized SH-4 integration assembly, and the official v1.15
 update supplied by the owner. It creates a sparse template and local review
 artifacts. It does not create an update, write USB media, or contact a player.
@@ -31,12 +31,14 @@ python3 -B build_flac_alpha1_source.py \
 ```
 
 The output directory must be new and on a local disk. A successful build writes
-`flac_alpha1_template.json` there: 80,481 bytes, SHA-256
-`b54d831e8881eaab587115c9deadfccc69fbb41cdfdea39ae547f8ac25356462`.
-This is byte-identical to the template in the alpha.1 patcher. The builder
+`flac_alpha1_template.json` there: 80,645 bytes, SHA-256
+`d6d24025c4720a3ab0b4ff76d8a6e1d7894d8d23b652cda1b776f4682c79c161`.
+This is byte-identical to the template in the alpha.2 patcher. The builder
 also checks the compiled 53,228-byte FLAC payload, gate, satellite, cache,
-complete decoded application, and all 236 generated template spans against
+complete decoded application, and all 238 generated template spans against
 their reviewed identities. `SOURCE_BUILD_MANIFEST.json` pins source inputs.
+The authored 76-byte early source-reply reader-release helper is compiled from
+`thirdparty/build/early_reply.S` and checked against its reviewed identity.
 The final `source-build-result.json` is written only after every check passes.
 
 The assembly source uses zero placeholders at eight exact relocation windows.
@@ -47,11 +49,11 @@ the source package. The three `alac_*.h` files provide shared type declarations
 needed to compile retained interfaces; this build includes no ALAC C decoder
 or ALAC payload mode.
 
-The source build covers the fixed alpha.1 application template. The separate
+The source build covers the fixed alpha.2 application template. The separate
 `patcher.py` consumes that template and the same official input to serialize
-the v1.16 update. Its full test checks the 17,479,419-byte output against SHA-256
-`8814d02f13e8d7a9feaa8bb6f45a11fccd174d144737cc009b087ae7b5c089fb`.
-No change to the existing alpha.1 firmware or playback behavior is implied by
+the Ver1.22 update. Its full test checks the 17,479,565-byte output against SHA-256
+`817d2ad30066d2e1c41a224e6cb63786374d6a0cf05ac48c1a609eb5388368b2`.
+No change to the existing alpha.2 firmware or playback behavior is implied by
 adding these source build files.
 
 ## Patcher verification

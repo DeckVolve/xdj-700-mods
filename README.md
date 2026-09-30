@@ -1,11 +1,11 @@
 # DeckVolve — XDJ-700 mods
 
-FLAC support for the Pioneer DJ XDJ-700. This first release, **v0.1.0-alpha.1**,
+FLAC support for the Pioneer DJ XDJ-700. This release, **v0.1.0-alpha.2**,
 includes a patcher and source code. You supply the official firmware; no
 firmware is distributed here. ALAC is not included.
 
-**Known issue:** AAC/M4A can load slowly and make the player sluggish. Avoid
-AAC/M4A in this alpha, and do not rely on it for live performances.
+Alpha.2 fixes the slow AAC/M4A loading observed in alpha.1.
+Do not rely on this experimental alpha for live performances.
 See the [release notes](RELEASE_NOTES.md) for tested behavior and limitations.
 
 ## Create the update
@@ -39,7 +39,7 @@ Use the manufacturer's update guide from the download page. Keep stable power
 and leave the USB connected until the update finishes. A failed write can leave
 the player unusable, and recovery is not guaranteed.
 
-The updater reports **1.16**; Utility reports **1.14**.
+The updater reports **1.22**; Utility reports **0.96**.
 
 ## Development
 

@@ -1,9 +1,9 @@
 {
   "files": [
     {
-      "bytes": 18346,
+      "bytes": 19370,
       "path": "build_flac_alpha1_source.py",
-      "sha256": "d3f163948bf7abc35af265139561b3c9431f9fc3f428e1ee0cd517b95c357174"
+      "sha256": "49bc83d23ae629ef1905bd8b3c5b865468fe8f0157065ce27c1b5866969eee49"
     },
     {
       "bytes": 12431,
@@ -13,7 +13,7 @@
     {
       "bytes": 10440,
       "path": "patcher.py",
-      "sha256": "42bc0563028aac47d795bd9ea7168c719b8922ac6db46c5efbaf576afd6622e7"
+      "sha256": "046bcbd982631077e18a96867ab0a894a3ecd2b038bf39176e769748e204f75a"
     },
     {
       "bytes": 2462,
@@ -54,6 +54,16 @@
       "bytes": 1007,
       "path": "thirdparty/build/dual_format_runtime.h",
       "sha256": "09cffb30caccfeff26759a59fe54060aea1633901de53b2fa07d8e15ab3bf9ca"
+    },
+    {
+      "bytes": 1454,
+      "path": "thirdparty/build/early_reply.S",
+      "sha256": "8cde0ef5629e27a291ad2794ec578385d620805b436f2084448de05cedcbf241"
+    },
+    {
+      "bytes": 170,
+      "path": "thirdparty/build/early_reply.ld",
+      "sha256": "86403a448149709f03b023531778babd2f6690ff528e926a31b9f31e19f74a8e"
     },
     {
       "bytes": 107,
@@ -387,5 +397,5 @@
     }
   ],
   "schema": 1,
-  "scope": "FLAC alpha.1 complete source build inputs"
+  "scope": "FLAC alpha.2 complete source build inputs"
 }

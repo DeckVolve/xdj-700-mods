@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the fixed FLAC alpha.1 sparse template from source and owner firmware.
+"""Rebuild the fixed FLAC alpha.2 sparse template from source and owner firmware.
 
 This produces a template and private intermediate binaries, never an update or
 USB image. The released patcher separately consumes the verified template.
@@ -27,8 +27,8 @@ BASE = 0x08000000
 PAYLOAD_VMA = 0x091BD7B0
 HEADER_VMA = 0x091BD7A0
 TARGET_SIZE = 18_655_132
-TARGET_SHA = "5d8a80a1a991d6209d181d4098dc1cca5c7da3b1b2d79394242dbc5c6ccefa53"
-TEMPLATE_SHA = "b54d831e8881eaab587115c9deadfccc69fbb41cdfdea39ae547f8ac25356462"
+TARGET_SHA = "9bfb9df00336bf79c9c0acc529f29ed1a23afaa82c5fb49df7ed4dffd214d2b6"
+TEMPLATE_SHA = "d6d24025c4720a3ab0b4ff76d8a6e1d7894d8d23b652cda1b776f4682c79c161"
 PAYLOAD_SHA = "522e99437d48831800dc19b6fc29da7fa8c864eb4484f0fe08efe415c0a79cb3"
 GATE_SHA = "32f301307e8e777617e258e973d639716452823719cf738558103465c7d7697e"
 SATELLITE_SHA = "23c373656b98c74ec78e27816dc817c94b614520870d967a7c3097bab9048f51"
@@ -225,7 +225,7 @@ def build_gate(out: Path, tool: Path, stock: bytes, blob: bytes,
 
 
 def assemble_decoded(stock: bytes, payload: bytes, gate: bytes, satellite: bytes,
-                     cache: bytes, gate_symbols: dict[str, int]) -> bytes:
+                     cache: bytes, gate_symbols: dict[str, int], helper: bytes) -> bytes:
     result = bytearray(stock + b"\xff" * (TARGET_SIZE - len(stock)))
     require(len(result) == TARGET_SIZE and result[0x740:0x745] == b"1.15\0",
             "stock decoded layout differs")
@@ -254,7 +254,11 @@ def assemble_decoded(stock: bytes, payload: bytes, gate: bytes, satellite: bytes
     place(0x080FBB80, satellite, erased=True)
     place(0x080FC100, cache, erased=True)
     place(0x08BFFE72, far_jump(0x08BFFE72, 0x080FC100, 12))
-    result[0x743] = ord("4")
+    require(result[0xC01F6C:0xC01F70] == struct.pack("<I", 0x08E01AC0),
+            "native source-reply literal differs")
+    place(0x080FBB00, helper, erased=True)
+    place(0x08C01F6C, struct.pack("<I", 0x080FBB00))
+    result[0x740:0x745] = b"0.96\0"
     header = struct.pack("<4sBBHII", b"X7LS", 16, 1, 1,
                          len(payload), zlib.crc32(payload) & 0xffffffff)
     require(len(header) == 16, "payload header length differs")
@@ -290,7 +294,7 @@ def make_recipe(stock: bytes, target: bytes) -> bytes:
               "target_decoded_size": len(target), "target_decoded_sha256": sha(target),
               "spans": spans, "owner_stock_copy_ops": operations}
     encoded = (json.dumps(recipe, sort_keys=True, separators=(",", ":")) + "\n").encode()
-    checked(encoded, 80_481, TEMPLATE_SHA, "rebuilt sparse template")
+    checked(encoded, 80_645, TEMPLATE_SHA, "rebuilt sparse template")
     require(patcher.apply_recipe(stock, recipe) == target,
             "rebuilt sparse template does not reconstruct target")
     return encoded
@@ -353,11 +357,22 @@ def main() -> None:
     print("Building target gates and sparse template...", file=sys.stderr, flush=True)
     gate, sat, cache, gate_symbols = build_gate(out, tool, stock, header + payload,
                                                 payload_symbols)
-    target = assemble_decoded(stock, payload, gate, sat, cache, gate_symbols)
+    # Compile the authored early source-reply reader-release helper.
+    run(tool / "sh4-linux-gcc", "-m4a", "-ml", "-c",
+        ROOT / "thirdparty/build/early_reply.S", "-o", out / "early_reply.o")
+    run(tool / "sh4-linux-gcc", "-m4a", "-ml", "-nostdlib", "-static",
+        "-Wl,--build-id=none", f"-Wl,-T,{ROOT / 'thirdparty/build/early_reply.ld'}",
+        "-o", out / "early_reply.elf", out / "early_reply.o")
+    run(tool / "sh4-buildroot-linux-uclibc-objcopy", "-O", "binary",
+        "--only-section=.text", out / "early_reply.elf", out / "early_reply.bin")
+    helper = checked((out / "early_reply.bin").read_bytes(), 76,
+                     "3b2cf21487cfa17fa31a4058f2eb586c499a5c646ad33397dc64d0eb3109566d",
+                     "compiled early reply helper")
+    target = assemble_decoded(stock, payload, gate, sat, cache, gate_symbols, helper)
     recipe = make_recipe(stock, target)
     require(official.read_bytes() == official_bytes, "official input changed during build")
     (out / "flac_alpha1_template.json").write_bytes(recipe)
-    report = {"schema": 1, "scope": "source-only FLAC alpha.1 template rebuild",
+    report = {"schema": 1, "scope": "source-only FLAC alpha.2 template rebuild",
               "firmware_installable": False, "official_upd_sha256": sha(official_bytes),
               "payload_sha256": sha(payload), "gate_sha256": sha(gate),
               "satellite_sha256": sha(sat), "cache_sha256": sha(cache),

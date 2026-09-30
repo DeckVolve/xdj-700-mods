@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the fixed XDJ-700 FLAC alpha.1 update from an owner-supplied official UPD."""
+"""Rebuild the fixed XDJ-700 FLAC alpha.2 update from an owner-supplied official UPD."""
 from __future__ import annotations
 
 import argparse
@@ -21,12 +21,12 @@ from srecord_update import build_upd, validate_crc16_le
 STOCK_UPD = (17_371_335, '73edec9802da51672257c2599efc04209dc92478fcbaa1a0425b3b122e33f99c')
 STOCK_MAIN = (0x006EA7C0, 'de683f253eba02e86ada5c89f2302a0f3a45331ffdcb5e6f9f20359aa6f6ce3a')
 STOCK_PANL = (0x40000, '52c5a54320c11477c50ed1da93fc585128c50e9e78d624c5ae27a8f4ad4c3a99')
-TARGET_UPD = (17_479_419, '8814d02f13e8d7a9feaa8bb6f45a11fccd174d144737cc009b087ae7b5c089fb')
-TARGET_MAIN = (7_296_244, '79aef473a2223e3057a76da3f2c87b62e649d2b48e75a0984db73b1dfd46dc43')
-TARGET_DECODED = (18_655_132, '5d8a80a1a991d6209d181d4098dc1cca5c7da3b1b2d79394242dbc5c6ccefa53')
+TARGET_UPD = (17_479_565, '817d2ad30066d2e1c41a224e6cb63786374d6a0cf05ac48c1a609eb5388368b2')
+TARGET_MAIN = (7_296_303, '40cf2ae9872a859f11d5c1bf45603fcb78513c3ace2eca36f8ab81f7d0e54a8f')
+TARGET_DECODED = (18_655_132, '9bfb9df00336bf79c9c0acc529f29ed1a23afaa82c5fb49df7ed4dffd214d2b6')
 RECIPE = Path(__file__).resolve().parent / 'flac_alpha1_template.json'
-RECIPE_BYTES = 80_481
-RECIPE_SHA = 'b54d831e8881eaab587115c9deadfccc69fbb41cdfdea39ae547f8ac25356462'
+RECIPE_BYTES = 80_645
+RECIPE_SHA = 'd6d24025c4720a3ab0b4ff76d8a6e1d7894d8d23b652cda1b776f4682c79c161'
 
 def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -145,16 +145,16 @@ def build(official: bytes, recipe_bytes: bytes) -> bytes:
     validate_section_checksum(main, 0x40000)
     decoded = decode_section(main, 0x40000)
     modified = apply_recipe(decoded, recipe)
-    print('Encoding fixed alpha.1 application; this can take a few minutes...',
+    print('Encoding fixed alpha.2 application; this can take a few minutes...',
           file=sys.stderr, flush=True)
     main_new = main[:0x40000] + append_section_checksum(encode_section(modified))
     pinned(main_new, TARGET_MAIN, 'rebuilt MAIN')
     validate_section_checksum(main_new, 0x40000)
     require(decode_section(main_new, 0x40000) == modified,
             'rebuilt MAIN decompression differs')
-    update = build_upd(main_new, panl, main_ver=b'Ver1.16',
+    update = build_upd(main_new, panl, main_ver=b'Ver1.22',
                        source_upd_bytes=official)
-    pinned(update, TARGET_UPD, 'rebuilt alpha.1 UPD')
+    pinned(update, TARGET_UPD, 'rebuilt alpha.2 UPD')
     return update
 
 def main() -> int:
@@ -189,7 +189,7 @@ def main() -> int:
             out.write(update)
             out.flush()
             os.fsync(out.fileno())
-        pinned(temporary.read_bytes(), TARGET_UPD, 'temporary alpha.1 UPD')
+        pinned(temporary.read_bytes(), TARGET_UPD, 'temporary alpha.2 UPD')
         # Hard-link creation is atomic and fails if the requested output exists.
         # This keeps a partial update from ever appearing under an UPD name.
         try:
@@ -198,7 +198,7 @@ def main() -> int:
             raise ValueError('output appeared during build; refusing overwrite') from error
         except OSError as error:
             raise ValueError('output filesystem must support hard links') from error
-        pinned(target.read_bytes(), TARGET_UPD, 'written alpha.1 UPD')
+        pinned(target.read_bytes(), TARGET_UPD, 'written alpha.2 UPD')
     finally:
         try:
             visible = temporary.lstat()

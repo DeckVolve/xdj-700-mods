@@ -1,6 +1,6 @@
-# XDJ-700 FLAC support — v0.1.0-alpha.1
+# XDJ-700 FLAC support — v0.1.0-alpha.2
 
-First experimental FLAC release from DeckVolve. This release supplies source
+Experimental FLAC release from DeckVolve. This release supplies source
 and an owner-input patcher, not a firmware download. The patcher requires the
 exact official XDJ-700 v1.15 update and creates the modified updater locally.
 
@@ -18,10 +18,14 @@ containers. They do not qualify every FLAC encoding, library mode or device.
 
 ## Known issues and limits
 
-- **AAC/M4A regression:** a tested AAC-LC track loads slowly and leaves the
-  player sluggish, including when loaded first after boot. The exact same file
-  and restored export work normally on official v1.15. Avoid AAC/M4A in this
-  alpha. An AAC fix is not included.
+- **AAC/M4A slow loading fixed:** bounded owner testing found fast first M4A
+  loading, normal short FLAC playback/pause and fast return to M4A.
+- Later AAC/M4A testing reported UI sluggishness. Its cause is
+  unresolved; an alpha.2 UI regression is not established and stock-like UI
+  responsiveness, full-track playback, seeking and every browse route are not
+  qualified.
+- The exact owner-tested updater reports MAIN 1.22 / Utility 0.96. Official
+  v1.15 restore acceptance from this version has not been qualified.
 - Linux is the validated patcher platform. Windows and macOS are unvalidated.
 - ALAC, new library formats and other modifications are not included.
 - This is not a reliability-qualified release for live use.
@@ -37,5 +41,5 @@ updaters, owner media, test captures and research Git history are excluded.
 
 Project-authored code is MIT, attributed to DeckVolve contributors. libFLAC's BSD
 and MD5 notices and the GCC runtime exception remain intact; see
-[LICENSING.md](LICENSING.md). The source packaging/attribution update changes no
-firmware bytes or behavior from the previously prepared alpha.1 patcher.
+[LICENSING.md](LICENSING.md). The authored 76-byte reader-release helper releases the dispatch reader before
+native source-reply publication. FLAC decoder and payload bytes are unchanged.

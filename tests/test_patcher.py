@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Owner-input tests for the fixed alpha.1 patcher (no USB/player access)."""
+"""Owner-input tests for the fixed alpha.2 patcher (no USB/player access)."""
 from __future__ import annotations
 
 import argparse
+import base64
 import os
 from pathlib import Path
 import shutil
@@ -35,7 +36,20 @@ def run(official_path: Path, *, full: bool) -> None:
     recipe = patcher.RECIPE.read_bytes()
     patcher.pinned(recipe, (patcher.RECIPE_BYTES, patcher.RECIPE_SHA), 'template')
     import json
-    assembled = patcher.apply_recipe(decoded, json.loads(recipe))
+    document = json.loads(recipe)
+    assert sum(op['size'] for op in document['owner_stock_copy_ops']) == 98
+    for operation in document['owner_stock_copy_ops']:
+        start, end = operation['dest_offset'], operation['dest_offset'] + operation['size']
+        for span in document['spans']:
+            data = base64.b64decode(span['data'], validate=True)
+            a, b = max(start, span['offset']), min(end, span['offset'] + len(data))
+            if a < b:
+                assert data[a-span['offset']:b-span['offset']] == bytes(b-a)
+    assembled = patcher.apply_recipe(decoded, document)
+    assert assembled[0x740:0x745] == b'0.96\0'
+    assert assembled[0xC01F6C:0xC01F70] == bytes.fromhex('00bb0f08')
+    assert patcher.sha(assembled[0xFBB00:0xFBB4C]) == \
+        '3b2cf21487cfa17fa31a4058f2eb586c499a5c646ad33397dc64d0eb3109566d'
     assert (len(assembled), patcher.sha(assembled)) == patcher.TARGET_DECODED
 
     with tempfile.TemporaryDirectory(prefix='xdj700-patcher-test-') as temporary:
@@ -87,7 +101,10 @@ def run(official_path: Path, *, full: bool) -> None:
                                      '--official-upd', str(official_path), '--output', str(target)],
                                     capture_output=True, text=True)
             assert result.returncode == 0, result.stderr
-            assert patcher.pinned(target.read_bytes(), patcher.TARGET_UPD, 'created UPD')
+            update = patcher.pinned(target.read_bytes(), patcher.TARGET_UPD, 'created UPD')
+            main_doc, panel_doc = patcher.split_upd(update)
+            assert main_doc.startswith(b'XDJ-700     MAINVer1.22')
+            assert panel_doc == patcher.split_upd(official)[1]
 
 
 if __name__ == '__main__':
